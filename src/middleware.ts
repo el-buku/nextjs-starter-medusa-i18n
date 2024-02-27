@@ -3,13 +3,9 @@ import { notFound } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
 import createIntlMiddleware from "next-intl/middleware"
 
-import { fallbackLng, languages } from "./lib/i18n/settings"
+import { fallbackLng, intlConfig, languages } from "./lib/i18n/settings"
 
-const intlMiddleware = createIntlMiddleware({
-  locales: languages,
-  defaultLocale: fallbackLng,
-  localeDetection: true,
-})
+const intlMiddleware = createIntlMiddleware(intlConfig)
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
 const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
