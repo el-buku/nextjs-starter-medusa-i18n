@@ -1,6 +1,15 @@
 import { Region } from "@medusajs/medusa"
 import { notFound } from "next/navigation"
 import { NextRequest, NextResponse } from "next/server"
+import createIntlMiddleware from "next-intl/middleware"
+
+import { fallbackLng, languages } from "./lib/i18n/settings"
+
+const intlMiddleware = createIntlMiddleware({
+  locales: languages,
+  defaultLocale: fallbackLng,
+  localeDetection: true,
+})
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL
 const DEFAULT_REGION = process.env.NEXT_PUBLIC_DEFAULT_REGION || "us"
@@ -49,7 +58,8 @@ async function getRegionMap() {
  */
 async function getCountryCode(
   request: NextRequest,
-  regionMap: Map<string, Region | number>
+  regionMap: Map<string, Region | number>,
+  countryCodePathnameIndex: number
 ) {
   try {
     let countryCode
@@ -57,8 +67,10 @@ async function getCountryCode(
     const vercelCountryCode = request.headers
       .get("x-vercel-ip-country")
       ?.toLowerCase()
-
-    const urlCountryCode = request.nextUrl.pathname.split("/")[1]?.toLowerCase()
+    console.log({ pna: request.nextUrl.pathname.split("/") })
+    const urlCountryCode = request.nextUrl.pathname
+      .split("/")
+      [countryCodePathnameIndex]?.toLowerCase()
 
     if (urlCountryCode && regionMap.has(urlCountryCode)) {
       countryCode = urlCountryCode
@@ -92,33 +104,53 @@ export async function middleware(request: NextRequest) {
   const cartIdCookie = request.cookies.get("_medusa_cart_id")
 
   const regionMap = await getRegionMap()
-
-  const countryCode = regionMap && (await getCountryCode(request, regionMap))
-
+  const pathnameArr = request.nextUrl.pathname.split("/")
+  const urlHasKnownLocale = languages.includes(pathnameArr[1])
+  // need to redirect manually if we provide a wrong locale when a countryCode is included
+  const urlHasUnknownLocale =
+    !urlHasKnownLocale &&
+    pathnameArr[1].length == 2 &&
+    (pathnameArr?.[2] ? pathnameArr[2].length == 2 : true)
+  const countryCodePathnameIndex = urlHasKnownLocale ? 2 : 1
+  const countryCode =
+    regionMap &&
+    (await getCountryCode(request, regionMap, countryCodePathnameIndex))
   const urlHasCountryCode =
-    countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
+    countryCode &&
+    request.nextUrl.pathname.split("/")[countryCodePathnameIndex] == countryCode
 
   // check if one of the country codes is in the url
   if (
+    !urlHasUnknownLocale &&
     urlHasCountryCode &&
     (!isOnboarding || onboardingCookie) &&
     (!cartId || cartIdCookie)
   ) {
-    return NextResponse.next()
+    return intlMiddleware(request)
   }
-
   const redirectPath =
-    request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
+    request.nextUrl.pathname === "/"
+      ? ""
+      : urlHasKnownLocale || urlHasUnknownLocale
+      ? pathnameArr.slice(2).join("/")
+      : request.nextUrl.pathname
 
   const queryString = request.nextUrl.search ? request.nextUrl.search : ""
 
   let redirectUrl = request.nextUrl.href
 
   let response = NextResponse.redirect(redirectUrl, 307)
-
+  if (urlHasUnknownLocale) {
+    redirectUrl = `${request.nextUrl.origin}/${fallbackLng}/${redirectPath}${queryString}`
+    console.log("urlHasUnknownLocale", { redirectUrl })
+    response = NextResponse.redirect(`${redirectUrl}`, 307)
+  }
   // If no country code is set, we redirect to the relevant region.
   if (!urlHasCountryCode && countryCode) {
-    redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
+    redirectUrl = `${request.nextUrl.origin}/${
+      urlHasKnownLocale ? pathnameArr[1] + "/" : ""
+    }${countryCode}/${redirectPath}${queryString}`
+    console.log("urlHasCountryCode", { redirectUrl })
     response = NextResponse.redirect(`${redirectUrl}`, 307)
   }
 

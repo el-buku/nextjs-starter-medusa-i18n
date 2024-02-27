@@ -1,10 +1,13 @@
 const { withStoreConfig } = require("./store-config")
+const nextIntl = require("next-intl/plugin")
+
+const withNextIntl = nextIntl("./src/lib/i18n/request-config.js")
 const store = require("./store.config.json")
 
 /**
  * @type {import('next').NextConfig}
  */
-const nextConfig = withStoreConfig({
+const configOpts = {
   features: store.features,
   reactStrictMode: true,
   images: {
@@ -27,7 +30,9 @@ const nextConfig = withStoreConfig({
       },
     ],
   },
-})
+}
+
+const nextConfig = withNextIntl(withStoreConfig(configOpts))
 
 console.log("next.config.js", JSON.stringify(module.exports, null, 2))
 
