@@ -7,7 +7,8 @@ import ReactCountryFlag from "react-country-flag"
 
 import { StateType } from "@lib/hooks/use-toggle-state"
 import { updateRegion } from "app/[locale]/actions"
-import { useParams, usePathname } from "next/navigation"
+import { useParams } from "next/navigation"
+import { usePathname } from "@lib/i18n/navigation"
 
 type CountryOption = {
   country: string

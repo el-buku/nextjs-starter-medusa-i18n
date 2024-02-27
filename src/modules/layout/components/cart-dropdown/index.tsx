@@ -3,8 +3,9 @@
 import { Popover, Transition } from "@headlessui/react"
 import { Cart } from "@medusajs/medusa"
 import { Button } from "@medusajs/ui"
-import { useParams, usePathname } from "next/navigation"
+import { useParams } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
+import { usePathname } from "@lib/i18n/navigation"
 
 import { formatAmount } from "@lib/util/prices"
 import DeleteButton from "@modules/common/components/delete-button"

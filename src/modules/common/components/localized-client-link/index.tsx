@@ -1,6 +1,6 @@
 "use client"
 
-import Link from "next/link"
+import { Link } from "@lib/i18n/navigation"
 import { useParams } from "next/navigation"
 import React from "react"
 

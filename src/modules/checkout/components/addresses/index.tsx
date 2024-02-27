@@ -1,11 +1,6 @@
 "use client"
 
-import {
-  useSearchParams,
-  useRouter,
-  usePathname,
-  useParams,
-} from "next/navigation"
+import { useSearchParams, useParams } from "next/navigation"
 import { Cart, Customer } from "@medusajs/medusa"
 import { CheckCircleSolid } from "@medusajs/icons"
 import { Heading, Text, useToggleState } from "@medusajs/ui"
@@ -20,6 +15,7 @@ import { SubmitButton } from "../submit-button"
 import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
+import { usePathname, useRouter } from "@lib/i18n/navigation"
 
 const Addresses = ({
   cart,

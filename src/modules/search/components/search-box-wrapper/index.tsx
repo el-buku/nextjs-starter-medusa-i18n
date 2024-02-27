@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation"
+import { useRouter } from "@lib/i18n/navigation"
 import {
   ChangeEvent,
   FormEvent,

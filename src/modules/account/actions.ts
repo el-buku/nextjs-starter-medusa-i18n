@@ -10,7 +10,7 @@ import {
   updateShippingAddress,
 } from "@lib/data"
 import { revalidateTag } from "next/cache"
-import { redirect } from "next/navigation"
+import { redirect } from "@lib/i18n/navigation"
 import { cookies, headers } from "next/headers"
 import {
   Customer,

@@ -11,7 +11,7 @@ import {
 } from "@lib/data"
 import { GiftCard, StorePostCartsCartReq } from "@medusajs/medusa"
 import { revalidateTag } from "next/cache"
-import { redirect } from "next/navigation"
+import { redirect } from "@lib/i18n/navigation"
 
 export async function cartUpdate(data: StorePostCartsCartReq) {
   const cartId = cookies().get("_medusa_cart_id")?.value

@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useContext, useEffect, useMemo, useState } from "react"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { RadioGroup } from "@headlessui/react"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { Cart } from "@medusajs/medusa"
@@ -16,6 +16,7 @@ import PaymentContainer from "@modules/checkout/components/payment-container"
 import { setPaymentMethod } from "@modules/checkout/actions"
 import { paymentInfoMap } from "@lib/constants"
 import { StripeContext } from "@modules/checkout/components/payment-wrapper"
+import { usePathname, useRouter } from "@lib/i18n/navigation"
 
 const Payment = ({
   cart,

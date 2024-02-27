@@ -12,8 +12,9 @@ import Radio from "@modules/common/components/radio"
 import Spinner from "@modules/common/icons/spinner"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { setShippingMethod } from "@modules/checkout/actions"
-import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import { usePathname, useRouter } from "@lib/i18n/navigation"
 
 type ShippingProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
