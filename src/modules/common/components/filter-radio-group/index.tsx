@@ -1,6 +1,8 @@
 import { EllipseMiniSolid } from "@medusajs/icons"
 import { Label, RadioGroup, Text, clx } from "@medusajs/ui"
 import { ChangeEvent } from "react"
+import k, { TranslationDef } from "@lib/i18n/translations/keys"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type FilterRadioGroupProps = {
   title: string
@@ -18,6 +20,7 @@ const FilterRadioGroup = ({
   value,
   handleChange,
 }: FilterRadioGroupProps) => {
+  const t = useSafeTranslations()
   return (
     <div className="flex gap-x-3 flex-col gap-y-3">
       <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
@@ -43,7 +46,7 @@ const FilterRadioGroup = ({
               value={i.value}
             />
             <Label
-              placeholder={i.label}
+              placeholder={t(k[i.label as keyof TranslationDef])}
               htmlFor={i.value}
               className={clx(
                 "!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer",
@@ -52,7 +55,7 @@ const FilterRadioGroup = ({
                 }
               )}
             >
-              {i.label}
+              {t(k[i.label as keyof TranslationDef])}
             </Label>
           </div>
         ))}

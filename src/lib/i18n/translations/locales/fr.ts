@@ -110,8 +110,8 @@ const def: TranslationDef = {
   [k.COLLECTIONS]: `Collections`,
   [k.MEDUSA]: `Medusa`,
   [k.GITHUB]: `GitHub`,
-  [k.DOCUMENTATION]: `Documentation`,
-  [k.SOURCE_CODE]: `Code source`,
+  [k.DOCUMENTATION]: `Docs`,
+  [k.SOURCE_CODE]: `Source`,
   [k.MEDUSA_STORE_ALL_RIGHTS_RESER]: `Medusa Store. Tous droits réservés.`,
   [k.SEARCH]: `Rechercher`,
   [k.ACCOUNT]: `Compte`,
@@ -202,5 +202,9 @@ const def: TranslationDef = {
   [k.NO_BILLING_ADDRESS]: "Aucune adresse de facturation",
   [k.ENTER_VALID_EMAIL]: "Entrez une adresse e-mail valide",
   [k.SORT_BY]: "Trier par",
+
+  [k.LATEST_ARRIVALS]: "Dernières arrivées",
+  [k.PRICE_LOW_HIGH]: "Prix : Bas → Élevé",
+  [k.PRICE_HIGH_LOW]: "Prix : Élevé → Bas",
 }
 export default def

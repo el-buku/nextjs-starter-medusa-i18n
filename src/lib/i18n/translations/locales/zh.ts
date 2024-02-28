@@ -191,5 +191,9 @@ const def: TranslationDef = {
   [k.NO_BILLING_ADDRESS]: "没有账单地址",
   [k.ENTER_VALID_EMAIL]: "请输入有效的电子邮件",
   [k.SORT_BY]: "排序方式",
+
+  [k.LATEST_ARRIVALS]: "最新到货",
+  [k.PRICE_LOW_HIGH]: "价格：低 → 高",
+  [k.PRICE_HIGH_LOW]: "价格：高 → 低",
 }
 export default def

@@ -210,6 +210,9 @@ const def: TranslationDef = {
   [k.NO_BILLING_ADDRESS]: "No billing address",
   [k.ENTER_VALID_EMAIL]: "Enter a valid email",
   [k.SORT_BY]: "Sort by",
+  [k.LATEST_ARRIVALS]: "Latest Arrivals",
+  [k.PRICE_LOW_HIGH]: "Price: Low -> High",
+  [k.PRICE_HIGH_LOW]: "Price: High -> Low",
 }
 
 export default def

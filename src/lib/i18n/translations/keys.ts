@@ -188,6 +188,9 @@ const keys = {
   NO_BILLING_ADDRESS: "NO_BILLING_ADDRESS",
   ENTER_VALID_EMAIL: "ENTER_VALID_EMAIL",
   SORT_BY: "SORT_BY",
+  LATEST_ARRIVALS: "LATEST_ARRIVALS",
+  PRICE_LOW_HIGH: "PRICE_LOW_HIGH",
+  PRICE_HIGH_LOW: "PRICE_HIGH_LOW",
 } as const
 
 // Define the type of keys by extracting the keys from your `keys` object

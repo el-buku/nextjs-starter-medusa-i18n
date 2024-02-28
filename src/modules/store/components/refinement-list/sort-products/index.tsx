@@ -3,7 +3,7 @@
 import { ChangeEvent } from "react"
 
 import FilterRadioGroup from "@modules/common/components/filter-radio-group"
-import k from "@lib/i18n/translations/keys"
+import k, { TranslationDef } from "@lib/i18n/translations/keys"
 import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 export type SortOptions = "price_asc" | "price_desc" | "created_at"
@@ -16,15 +16,15 @@ type SortProductsProps = {
 const sortOptions = [
   {
     value: "created_at",
-    label: "Latest Arrivals",
+    label: k.LATEST_ARRIVALS,
   },
   {
     value: "price_asc",
-    label: "Price: Low -> High",
+    label: k.PRICE_LOW_HIGH,
   },
   {
     value: "price_desc",
-    label: "Price: High -> Low",
+    label: k.PRICE_HIGH_LOW,
   },
 ]
 
