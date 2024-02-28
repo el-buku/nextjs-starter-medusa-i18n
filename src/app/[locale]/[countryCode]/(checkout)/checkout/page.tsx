@@ -20,7 +20,7 @@ const fetchCart = async () => {
     return notFound()
   }
 
-  const cart = await getCart(cartId).then((cart) => cart)
+  const cart = await getCart(cartId).then((cart: any) => cart)
 
   if (cart?.items.length) {
     const enrichedItems = await enrichLineItems(cart?.items, cart?.region_id)
@@ -40,8 +40,10 @@ export default async function Checkout() {
   return (
     <div className="grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12">
       <Wrapper cart={cart}>
+        {/* @ts-expect-error */}
         <CheckoutForm />
       </Wrapper>
+      {/* @ts-expect-error */}
       <CheckoutSummary />
     </div>
   )
