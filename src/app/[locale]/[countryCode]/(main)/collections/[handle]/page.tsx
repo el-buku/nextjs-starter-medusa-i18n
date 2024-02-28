@@ -8,9 +8,10 @@ import {
 } from "@lib/data"
 import CollectionTemplate from "@modules/collections/templates"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { unstable_setRequestLocale } from "next-intl/server"
 
 type Props = {
-  params: { handle: string; countryCode: string }
+  params: { handle: string; countryCode: string; locale: string }
   searchParams: {
     page?: string
     sortBy?: SortOptions
@@ -61,6 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CollectionPage({ params, searchParams }: Props) {
   const { sortBy, page } = searchParams
+  unstable_setRequestLocale(params.locale)
 
   const collection = await getCollectionByHandle(params.handle).then(
     (collection) => collection

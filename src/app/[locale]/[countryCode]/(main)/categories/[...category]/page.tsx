@@ -4,9 +4,10 @@ import { notFound } from "next/navigation"
 import { getCategoryByHandle, listCategories, listRegions } from "@lib/data"
 import CategoryTemplate from "@modules/categories/templates"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { unstable_setRequestLocale } from "next-intl/server"
 
 type Props = {
-  params: { category: string[]; countryCode: string }
+  params: { category: string[]; countryCode: string; locale: string }
   searchParams: {
     sortBy?: SortOptions
     page?: string
@@ -65,6 +66,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CategoryPage({ params, searchParams }: Props) {
+  unstable_setRequestLocale(params.locale)
+
   const { sortBy, page } = searchParams
 
   const { product_categories } = await getCategoryByHandle(

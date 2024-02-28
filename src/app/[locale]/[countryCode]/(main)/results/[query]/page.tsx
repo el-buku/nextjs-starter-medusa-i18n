@@ -4,6 +4,7 @@ import SearchResultsTemplate from "@modules/search/templates/search-results-temp
 
 import { search } from "@modules/search/actions"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { unstable_setRequestLocale } from "next-intl/server"
 
 export const metadata: Metadata = {
   title: "Search",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 type Params = {
-  params: { query: string; countryCode: string }
+  params: { query: string; countryCode: string; locale: string }
   searchParams: {
     sortBy?: SortOptions
     page?: string
@@ -21,6 +22,7 @@ type Params = {
 export default async function SearchResults({ params, searchParams }: Params) {
   const { query } = params
   const { sortBy, page } = searchParams
+  unstable_setRequestLocale(params.locale)
 
   const hits = await search(query).then((data) => data)
 
