@@ -5,7 +5,6 @@ import { Region } from "@medusajs/medusa"
 import { Plus } from "@medusajs/icons"
 import { Button, Heading } from "@medusajs/ui"
 import { useEffect, useState } from "react"
-import { useFormState } from "react-dom"
 
 import useToggleState from "@lib/hooks/use-toggle-state"
 import CountrySelect from "@modules/checkout/components/country-select"
@@ -13,6 +12,8 @@ import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import { addCustomerShippingAddress } from "@modules/account/actions"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { useFormState } from "react-dom"
 
 const AddAddress = ({ region }: { region: Region }) => {
   const [successState, setSuccessState] = useState(false)
@@ -61,55 +62,55 @@ const AddAddress = ({ region }: { region: Region }) => {
             <div className="flex flex-col gap-y-2">
               <div className="grid grid-cols-2 gap-x-2">
                 <Input
-                  label="First name"
+                  label={t(k.FIRST_NAME)}
                   name="first_name"
                   required
                   autoComplete="given-name"
                 />
 
                 <Input
-                  label="Last name"
+                  label={t(k.LAST_NAME)}
                   name="last_name"
                   required
                   autoComplete="family-name"
                 />
               </div>
               <Input
-                label="Company"
+                label={t(k.COMPANY)}
                 name="company"
                 autoComplete="organization"
               />
 
               <Input
-                label="Address"
+                label={t(k.ADDRESS)}
                 name="address_1"
                 required
                 autoComplete="address-line1"
               />
 
               <Input
-                label="Apartment, suite, etc."
+                label={t(k.APARTMENT_SUITE_ETC)}
                 name="address_2"
                 autoComplete="address-line2"
               />
 
               <div className="grid grid-cols-[144px_1fr] gap-x-2">
                 <Input
-                  label="Postal code"
+                  label={t(k.POSTAL_CODE)}
                   name="postal_code"
                   required
                   autoComplete="postal-code"
                 />
 
                 <Input
-                  label="City"
+                  label={t(k.CITY)}
                   name="city"
                   required
                   autoComplete="locality"
                 />
               </div>
               <Input
-                label="Province / State"
+                label={t(k.PROVINCE_STATE)}
                 name="province"
                 autoComplete="address-level1"
               />
@@ -121,7 +122,7 @@ const AddAddress = ({ region }: { region: Region }) => {
                 autoComplete="country"
               />
 
-              <Input label="Phone" name="phone" autoComplete="phone" />
+              <Input label={t(k.PHONE)} name="phone" autoComplete="phone" />
             </div>
             {formState.error && (
               <div className="text-rose-500 text-small-regular py-2">

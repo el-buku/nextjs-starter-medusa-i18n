@@ -36,7 +36,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   return (
     <form action={formAction} onReset={() => clearState()} className="w-full">
       <AccountInfo
-        label="Password"
+        label={t(k.PASS)}
         currentInfo={<span>{t(k.THE_PASSWORD_IS_NOT_SHOWN_FOR)}</span>}
         isSuccess={successState}
         isError={!!state.error}
@@ -45,21 +45,21 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-2 gap-4">
           <Input
-            label="Old password"
+            label={t(k.OLD_PASSWORD)}
             name="old_password"
             required
             type="password"
           />
 
           <Input
-            label="New password"
+            label={t(k.NEW_PASSWORD)}
             type="password"
             name="new_password"
             required
           />
 
           <Input
-            label="Confirm password"
+            label={t(k.CONFIRM_PASSWORD)}
             type="password"
             name="confirm_password"
             required

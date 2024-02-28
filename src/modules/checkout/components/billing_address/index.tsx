@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import Input from "@modules/common/components/input"
 import CountrySelect from "../country-select"
 import { Cart } from "@medusajs/medusa"
+import k from "@lib/i18n/translations/keys"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const BillingAddress = ({
   cart,
@@ -10,6 +12,7 @@ const BillingAddress = ({
   cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null
   countryCode: string
 }) => {
+  const t = useSafeTranslations()
   const [formData, setFormData] = useState({
     "billing_address.first_name": cart?.billing_address?.first_name || "",
     "billing_address.last_name": cart?.billing_address?.last_name || "",
@@ -52,7 +55,7 @@ const BillingAddress = ({
     <>
       <div className="grid grid-cols-2 gap-4">
         <Input
-          label="First name"
+          label={t(k.FIRST_NAME)}
           name="billing_address.first_name"
           autoComplete="given-name"
           value={formData["billing_address.first_name"]}
@@ -60,7 +63,7 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Last name"
+          label={t(k.LAST_NAME)}
           name="billing_address.last_name"
           autoComplete="family-name"
           value={formData["billing_address.last_name"]}
@@ -68,7 +71,7 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Address"
+          label={t(k.ADDRESS)}
           name="billing_address.address_1"
           autoComplete="address-line1"
           value={formData["billing_address.address_1"]}
@@ -76,14 +79,14 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="Company"
+          label={t(k.COMPANY)}
           name="billing_address.company"
           value={formData["billing_address.company"]}
           onChange={handleChange}
           autoComplete="organization"
         />
         <Input
-          label="Postal code"
+          label={t(k.POSTAL_CODE)}
           name="billing_address.postal_code"
           autoComplete="postal-code"
           value={formData["billing_address.postal_code"]}
@@ -91,7 +94,7 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="City"
+          label={t(k.CITY)}
           name="billing_address.city"
           autoComplete="address-level2"
           value={formData["billing_address.city"]}
@@ -107,14 +110,14 @@ const BillingAddress = ({
           required
         />
         <Input
-          label="State / Province"
+          label={t(k.PROVINCE_STATE)}
           name="billing_address.province"
           autoComplete="address-level1"
           value={formData["billing_address.province"]}
           onChange={handleChange}
         />
         <Input
-          label="Phone"
+          label={t(k.PHONE)}
           name="billing_address.phone"
           autoComplete="tel"
           value={formData["billing_address.phone"]}

@@ -61,7 +61,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                               className="text-3xl leading-10 hover:text-ui-fg-disabled"
                               onClick={close}
                             >
-                              {name}
+                              {name && t(`MENU_${name.toUpperCase()}`)}
                             </LocalizedClientLink>
                           </li>
                         )

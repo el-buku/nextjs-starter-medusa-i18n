@@ -3,6 +3,8 @@
 import { ChangeEvent } from "react"
 
 import FilterRadioGroup from "@modules/common/components/filter-radio-group"
+import k from "@lib/i18n/translations/keys"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 export type SortOptions = "price_asc" | "price_desc" | "created_at"
 
@@ -31,10 +33,10 @@ const SortProducts = ({ sortBy, setQueryParams }: SortProductsProps) => {
     const newSortBy = e.target.value as SortOptions
     setQueryParams("sortBy", newSortBy)
   }
-
+  const t = useSafeTranslations()
   return (
     <FilterRadioGroup
-      title="Sort by"
+      title={t(k.SORT_BY)}
       items={sortOptions}
       value={sortBy}
       handleChange={handleChange}

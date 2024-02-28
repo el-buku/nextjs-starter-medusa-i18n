@@ -109,6 +109,11 @@ const def: TranslationDef = {
   [k.POWERED_BY]: `Powered by`,
   [k._7]: `&`,
   [k.MENU]: `Menu`,
+  [k.MENU_HOME]: `Home`,
+  [k.MENU_ACCOUNT]: `Account`,
+  [k.MENU_STORE]: `Store`,
+  [k.MENU_SEARCH]: `Search`,
+  [k.MENU_CART]: `Cart`,
   [k._8]: `©`,
   [k.MEDUSA_STORE_ALL_RIGHTS]: `Medusa Store. All rights
                         reserved.`,
@@ -174,5 +179,37 @@ const def: TranslationDef = {
   [k.SHOWING_THE_FIRST]: `Showing the first`,
   [k.RESULTS]: `results.`,
   [k.VIEW_ALL]: `View all`,
+  [k.GOT_QUESTIONS]: `Got questions?`,
+  [k.FIND_FAQ]: ` You can find frequently asked questions and answers on our
+  customer service page.`,
+  [k.CUSTOMER_SERVICE]: `Customer Service`,
+  [k.SHIPPING_TO]: `Shipping to:`,
+  [k.EMAIL]: "Email",
+  [k.PASS]: "Password",
+
+  [k.FIRST_NAME]: "First name",
+  [k.LAST_NAME]: "Last name",
+  [k.COMPANY]: "Company",
+  [k.ADDRESS]: "Address",
+  [k.APARTMENT_SUITE_ETC]: "Apartment, suite, etc.",
+  [k.POSTAL_CODE]: "Postal code",
+  [k.CITY]: "City",
+  [k.PROVINCE_STATE]: "Province / State",
+  [k.PHONE]: "Phone",
+  [k.BILLING_ADDRESS]: "Billing address",
+  [k.NAME]: "Name",
+  [k.OLD_PASSWORD]: "Old password",
+  [k.NEW_PASSWORD]: "New password",
+  [k.CONFIRM_PASSWORD]: "Confirm password",
+  [k.PLEASE_ENTER_CODE]: "Please enter code",
+  [k.BILLING_ADDRESS_SAME_AS_SHIPPING_ADDRESS]:
+    "Billing address same as shipping address",
+
+  [k.EDIT]: "Edit",
+  [k.EDIT_ADDRESS]: "Edit address",
+  [k.NO_BILLING_ADDRESS]: "No billing address",
+  [k.ENTER_VALID_EMAIL]: "Enter a valid email",
+  [k.SORT_BY]: "Sort by",
 }
+
 export default def

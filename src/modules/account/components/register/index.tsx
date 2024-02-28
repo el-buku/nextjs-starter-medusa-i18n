@@ -30,30 +30,35 @@ const Register = ({ setCurrentView }: Props) => {
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
           <Input
-            label="First name"
+            label={t(k.FIRST_NAME)}
             name="first_name"
             required
             autoComplete="given-name"
           />
 
           <Input
-            label="Last name"
+            label={t(k.LAST_NAME)}
             name="last_name"
             required
             autoComplete="family-name"
           />
 
           <Input
-            label="Email"
+            label={t(k.EMAIL)}
             name="email"
             required
             type="email"
             autoComplete="email"
           />
 
-          <Input label="Phone" name="phone" type="tel" autoComplete="tel" />
           <Input
-            label="Password"
+            label={t(k.PHONE)}
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+          />
+          <Input
+            label={t(k.PASS)}
             name="password"
             required
             type="password"

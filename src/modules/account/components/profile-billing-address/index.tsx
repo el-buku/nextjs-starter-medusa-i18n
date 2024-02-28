@@ -9,6 +9,8 @@ import NativeSelect from "@modules/common/components/native-select"
 import AccountInfo from "../account-info"
 import { useFormState } from "react-dom"
 import { updateCustomerBillingAddress } from "@modules/account/actions"
+import k from "@lib/i18n/translations/keys"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type MyInformationProps = {
   customer: Omit<Customer, "password_hash">
@@ -31,7 +33,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
         .flat() || []
     )
   }, [regions])
-
+  const t = useSafeTranslations()
   const [successState, setSuccessState] = React.useState(false)
 
   const [state, formAction] = useFormState(updateCustomerBillingAddress, {
@@ -49,7 +51,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
 
   const currentInfo = useMemo(() => {
     if (!customer.billing_address) {
-      return "No billing address"
+      return t(k.NO_BILLING_ADDRESS)
     }
 
     const country =
@@ -82,7 +84,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
   return (
     <form action={formAction} onReset={() => clearState()} className="w-full">
       <AccountInfo
-        label="Billing address"
+        label={t(k.BILLING_ADDRESS)}
         currentInfo={currentInfo}
         isSuccess={successState}
         isError={!!state.error}
@@ -91,50 +93,50 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
         <div className="grid grid-cols-1 gap-y-2">
           <div className="grid grid-cols-2 gap-x-2">
             <Input
-              label="First name"
+              label={t(k.FIRST_NAME)}
               name="billing_address.first_name"
               defaultValue={customer.billing_address?.first_name || undefined}
               required
             />
             <Input
-              label="Last name"
+              label={t(k.LAST_NAME)}
               name="billing_address.last_name"
               defaultValue={customer.billing_address?.last_name || undefined}
               required
             />
           </div>
           <Input
-            label="Company"
+            label={t(k.COMPANY)}
             name="billing_address.company"
             defaultValue={customer.billing_address?.company || undefined}
           />
           <Input
-            label="Address"
+            label={t(k.ADDRESS)}
             name="billing_address.address_1"
             defaultValue={customer.billing_address?.address_1 || undefined}
             required
           />
           <Input
-            label="Apartment, suite, etc."
+            label={t(k.APARTMENT_SUITE_ETC)}
             name="billing_address.address_2"
             defaultValue={customer.billing_address?.address_2 || undefined}
           />
           <div className="grid grid-cols-[144px_1fr] gap-x-2">
             <Input
-              label="Postal code"
+              label={t(k.POSTAL_CODE)}
               name="billing_address.postal_code"
               defaultValue={customer.billing_address?.postal_code || undefined}
               required
             />
             <Input
-              label="City"
+              label={t(k.CITY)}
               name="billing_address.city"
               defaultValue={customer.billing_address?.city || undefined}
               required
             />
           </div>
           <Input
-            label="Province"
+            label={t(k.PROVINCE_STATE)}
             name="billing_address.province"
             defaultValue={customer.billing_address?.province || undefined}
           />

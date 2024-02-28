@@ -9,6 +9,8 @@ import { StateType } from "@lib/hooks/use-toggle-state"
 import { updateRegion } from "app/[locale]/actions"
 import { useParams } from "next/navigation"
 import { usePathname } from "@lib/i18n/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import k from "@lib/i18n/translations/keys"
 
 type CountryOption = {
   country: string
@@ -23,7 +25,7 @@ type CountrySelectProps = {
 
 const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
   const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
-
+  const t = useSafeTranslations()
   const { countryCode } = useParams()
   const currentPath = usePathname().split(`/${countryCode}`)[1]
 
@@ -67,7 +69,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
       >
         <Listbox.Button className="py-1 w-full">
           <div className="txt-compact-small flex items-start gap-x-2">
-            <span>Shipping to:</span>
+            <span>{t(k.SHIPPING_TO)}</span>
             {current && (
               <span className="txt-compact-small flex items-center gap-x-2">
                 <ReactCountryFlag
