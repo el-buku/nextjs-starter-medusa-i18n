@@ -1,3 +1,5 @@
+"use client"
+
 import k from "@lib/i18n/translations/keys"
 import { Metadata } from "next"
 
