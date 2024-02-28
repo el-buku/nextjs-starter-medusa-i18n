@@ -30,7 +30,7 @@ async function getRegionMap() {
         tags: ["regions"],
       },
     })
-    console.log(r)
+    console.log(`${BACKEND_URL}/store/regions`, r, await r.text())
     const res = await r.json()
     const { regions } = res
 
