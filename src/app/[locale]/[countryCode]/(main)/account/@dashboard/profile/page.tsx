@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { Metadata } from "next"
 
 import ProfilePhone from "@modules/account//components/profile-phone"
@@ -8,6 +9,7 @@ import ProfilePassword from "@modules/account/components/profile-password"
 
 import { getCustomer, listRegions } from "@lib/data"
 import { notFound } from "next/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -15,6 +17,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Profile() {
+  const t = useSafeTranslations()
+
   const customer = await getCustomer()
   const regions = await listRegions()
 
@@ -25,11 +29,9 @@ export default async function Profile() {
   return (
     <div className="w-full">
       <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">Profile</h1>
+        <h1 className="text-2xl-semi">{t(k.PROFILE)}</h1>
         <p className="text-base-regular">
-          View and update your profile information, including your name, email,
-          and phone number. You can also update your billing address, or change
-          your password.
+          {t(k.VIEW_AND_UPDATE_YOUR_PROFILE_I)}
         </p>
       </div>
       <div className="flex flex-col gap-y-8 w-full">

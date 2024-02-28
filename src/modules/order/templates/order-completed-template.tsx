@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { Order } from "@medusajs/medusa"
 import { Heading } from "@medusajs/ui"
 import { cookies } from "next/headers"
@@ -9,6 +10,7 @@ import OnboardingCta from "@modules/order/components/onboarding-cta"
 import OrderDetails from "@modules/order/components/order-details"
 import ShippingDetails from "@modules/order/components/shipping-details"
 import PaymentDetails from "@modules/order/components/payment-details"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type OrderCompletedTemplateProps = {
   order: Order
@@ -17,6 +19,8 @@ type OrderCompletedTemplateProps = {
 export default function OrderCompletedTemplate({
   order,
 }: OrderCompletedTemplateProps) {
+  const t = useSafeTranslations()
+
   const isOnboarding = cookies().get("_medusa_onboarding")?.value === "true"
 
   return (
@@ -28,12 +32,12 @@ export default function OrderCompletedTemplate({
             level="h1"
             className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
           >
-            <span>Thank you!</span>
-            <span>Your order was placed successfully.</span>
+            <span>{t(k.THANK_YOU)}</span>
+            <span>{t(k.YOUR_ORDER_WAS_PLACED_SUCCESSF)}</span>
           </Heading>
           <OrderDetails order={order} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
-            Summary
+            {t(k.SUMMARY)}
           </Heading>
           <Items items={order.items} region={order.region} />
           <CartTotals data={order} />

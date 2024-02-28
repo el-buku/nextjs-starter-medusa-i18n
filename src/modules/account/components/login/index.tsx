@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { useFormState } from "react-dom"
 
 import { LOGIN_VIEW } from "@modules/account/templates/login-template"
@@ -5,6 +6,7 @@ import Input from "@modules/common/components/input"
 import { logCustomerIn } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -12,12 +14,13 @@ type Props = {
 
 const Login = ({ setCurrentView }: Props) => {
   const [message, formAction] = useFormState(logCustomerIn, null)
+  const t = useSafeTranslations()
 
   return (
     <div className="max-w-sm w-full flex flex-col items-center">
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
+      <h1 className="text-large-semi uppercase mb-6">{t(k.WELCOME_BACK)}</h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-8">
-        Sign in to access an enhanced shopping experience.
+        {t(k.SIGN_IN_TO_ACCESS_AN_ENHANCED)}
       </p>
       <form className="w-full" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
@@ -29,6 +32,7 @@ const Login = ({ setCurrentView }: Props) => {
             autoComplete="email"
             required
           />
+
           <Input
             label="Password"
             name="password"
@@ -38,17 +42,17 @@ const Login = ({ setCurrentView }: Props) => {
           />
         </div>
         <ErrorMessage error={message} />
-        <SubmitButton className="w-full mt-6">Sign in</SubmitButton>
+        <SubmitButton className="w-full mt-6">{t(k.SIGN_IN)}</SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Not a member?{" "}
+        {t(k.NOT_A_MEMBER)}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
         >
-          Join us
+          {t(k.JOIN_US)}
         </button>
-        .
+        {t(k._)}
       </span>
     </div>
   )

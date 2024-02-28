@@ -10,6 +10,6 @@ export const getI18NConfigCallback: Parameters<
   }
 
   return {
-    messages: (await import(`../../../locales/${locale}.json`)).default,
+    messages: (await import(`./translations/locales/${locale}.ts`)).default,
   }
 }

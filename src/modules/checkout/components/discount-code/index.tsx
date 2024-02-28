@@ -1,4 +1,5 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { InformationCircleSolid } from "@medusajs/icons"
 import { Cart } from "@medusajs/medusa"
@@ -16,6 +17,7 @@ import {
   submitDiscountForm,
 } from "@modules/checkout/actions"
 import { formatAmount } from "@lib/util/prices"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type DiscountCodeProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -25,6 +27,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const { discounts, gift_cards, region } = cart
+  const t = useSafeTranslations()
 
   const appliedDiscount = useMemo(() => {
     if (!discounts || !discounts.length) {
@@ -60,14 +63,14 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
       <div className="txt-medium">
         {gift_cards.length > 0 && (
           <div className="flex flex-col mb-4">
-            <Heading className="txt-medium">Gift card(s) applied:</Heading>
+            <Heading className="txt-medium">{t(k.GIFT_CARD_S_APPLIED)}</Heading>
             {gift_cards?.map((gc) => (
               <div
                 className="flex items-center justify-between txt-small-plus"
                 key={gc.id}
               >
                 <Text className="flex gap-x-1 items-baseline">
-                  <span>Code: </span>
+                  <span>{t(k.CODE)} </span>
                   <span className="truncate">{gc.code}</span>
                 </Text>
                 <Text className="font-semibold">
@@ -82,7 +85,9 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   onClick={() => removeGiftCardCode(gc.code)}
                 >
                   <Trash size={14} />
-                  <span className="sr-only">Remove gift card from order</span>
+                  <span className="sr-only">
+                    {t(k.REMOVE_GIFT_CARD_FROM_ORDER)}
+                  </span>
                 </button>
               </div>
             ))}
@@ -92,12 +97,16 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         {appliedDiscount ? (
           <div className="w-full flex items-center">
             <div className="flex flex-col w-full">
-              <Heading className="txt-medium">Discount applied:</Heading>
+              <Heading className="txt-medium">{t(k.DISCOUNT_APPLIED)}</Heading>
               <div className="flex items-center justify-between w-full max-w-full">
                 <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
-                  <span>Code:</span>
+                  <span>{t(k.CODE)}</span>
                   <span className="truncate">{discounts[0].code}</span>
-                  <span className="min-w-fit">({appliedDiscount})</span>
+                  <span className="min-w-fit">
+                    {t(k._3)}
+                    {appliedDiscount}
+                    {t(k._4)}
+                  </span>
                 </Text>
                 <button
                   className="flex items-center"
@@ -105,7 +114,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 >
                   <Trash size={14} />
                   <span className="sr-only">
-                    Remove discount code from order
+                    {t(k.REMOVE_DISCOUNT_CODE_FROM_ORDE)}
                   </span>
                 </button>
               </div>
@@ -119,7 +128,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 type="button"
                 className="txt-medium text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               >
-                Add gift card or discount code
+                {t(k.ADD_GIFT_CARD_OR_DISCOUNT_CODE)}
               </button>
               <Tooltip content="You can add multiple gift cards, but only one discount code.">
                 <InformationCircleSolid color="var(--fg-muted)" />
@@ -134,7 +143,8 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                     type="text"
                     autoFocus={false}
                   />
-                  <SubmitButton variant="secondary">Apply</SubmitButton>
+
+                  <SubmitButton variant="secondary">{t(k.APPLY)}</SubmitButton>
                 </div>
                 <ErrorMessage error={message} />
               </>

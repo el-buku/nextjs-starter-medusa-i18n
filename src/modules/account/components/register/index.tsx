@@ -1,4 +1,5 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { useFormState } from "react-dom"
 
@@ -8,6 +9,7 @@ import { signUp } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -15,15 +17,15 @@ type Props = {
 
 const Register = ({ setCurrentView }: Props) => {
   const [message, formAction] = useFormState(signUp, null)
+  const t = useSafeTranslations()
 
   return (
     <div className="max-w-sm flex flex-col items-center">
       <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
+        {t(k.BECOME_A_MEDUSA_STORE_MEMBER)}
       </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
+        {t(k.CREATE_YOUR_MEDUSA_STORE_MEMBE)}
       </p>
       <form className="w-full flex flex-col" action={formAction}>
         <div className="flex flex-col w-full gap-y-2">
@@ -33,12 +35,14 @@ const Register = ({ setCurrentView }: Props) => {
             required
             autoComplete="given-name"
           />
+
           <Input
             label="Last name"
             name="last_name"
             required
             autoComplete="family-name"
           />
+
           <Input
             label="Email"
             name="email"
@@ -46,6 +50,7 @@ const Register = ({ setCurrentView }: Props) => {
             type="email"
             autoComplete="email"
           />
+
           <Input label="Phone" name="phone" type="tel" autoComplete="tel" />
           <Input
             label="Password"
@@ -57,33 +62,33 @@ const Register = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
+          {t(k.BY_CREATING_AN_ACCOUNT_YOU_AG)}{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
             className="underline"
           >
-            Privacy Policy
+            {t(k.PRIVACY_POLICY)}
           </LocalizedClientLink>{" "}
-          and{" "}
+          {t(k.AND)}{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"
           >
-            Terms of Use
+            {t(k.TERMS_OF_USE)}
           </LocalizedClientLink>
-          .
+          {t(k._)}
         </span>
-        <SubmitButton className="w-full mt-6">Join</SubmitButton>
+        <SubmitButton className="w-full mt-6">{t(k.JOIN)}</SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+        {t(k.ALREADY_A_MEMBER)}{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          {t(k.SIGN_IN)}
         </button>
-        .
+        {t(k._)}
       </span>
     </div>
   )

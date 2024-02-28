@@ -24,7 +24,6 @@ export default async function RootLayout({
   const { messages } = await getI18NConfigCallback({
     locale,
   })
-
   return (
     <html lang={locale} data-mode="light">
       <NextIntlClientProvider locale={locale} messages={messages}>

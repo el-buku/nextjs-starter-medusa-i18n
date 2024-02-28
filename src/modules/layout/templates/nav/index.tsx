@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { headers } from "next/headers"
 import { Suspense } from "react"
 
@@ -6,9 +7,12 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import CartButton from "@modules/layout/components/cart-button"
 import SideMenu from "@modules/layout/components/side-menu"
 import LanguageSwitcher from "@modules/common/components/language-switcher"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { getTranslations } from "next-intl/server"
 
 export default async function Nav() {
   const regions = await listRegions().then((regions) => regions)
+  const t = await getTranslations()
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
@@ -25,7 +29,7 @@ export default async function Nav() {
               href="/"
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
             >
-              Medusa Store
+              {t(k.MEDUSA_STORE)}
             </LocalizedClientLink>
           </div>
 
@@ -38,16 +42,17 @@ export default async function Nav() {
                   href="/search"
                   scroll={false}
                 >
-                  Search
+                  {t(k.SEARCH)}
                 </LocalizedClientLink>
               )}
+
               <LocalizedClientLink
                 className="hover:text-ui-fg-base"
                 href="/account"
               >
-                Account
+                {t(k.ACCOUNT)}
               </LocalizedClientLink>
-              lL
+              {t(k.LL)}
             </div>
             <Suspense
               fallback={
@@ -55,7 +60,7 @@ export default async function Nav() {
                   className="hover:text-ui-fg-base flex gap-2"
                   href="/cart"
                 >
-                  Cart (0)
+                  {t(k.CART2)}
                 </LocalizedClientLink>
               }
             >

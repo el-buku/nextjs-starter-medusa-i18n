@@ -1,10 +1,12 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { Order } from "@medusajs/medusa"
 import { Button } from "@medusajs/ui"
 
 import OrderCard from "../order-card"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const OrderOverview = ({ orders }: { orders: Order[] }) => {
   if (orders?.length) {
@@ -21,16 +23,17 @@ const OrderOverview = ({ orders }: { orders: Order[] }) => {
       </div>
     )
   }
+  const t = useSafeTranslations()
 
   return (
     <div className="w-full flex flex-col items-center gap-y-4">
-      <h2 className="text-large-semi">Nothing to see here</h2>
+      <h2 className="text-large-semi">{t(k.NOTHING_TO_SEE_HERE)}</h2>
       <p className="text-base-regular">
-        You don&apos;t have any orders yet, let us change that {":)"}
+        {t(k.YOU_DON_T_HAVE_ANY_ORDERS_YET)} {":)"}
       </p>
       <div className="mt-4">
         <LocalizedClientLink href="/" passHref>
-          <Button>Continue shopping</Button>
+          <Button>{t(k.CONTINUE_SHOPPING)}</Button>
         </LocalizedClientLink>
       </div>
     </div>

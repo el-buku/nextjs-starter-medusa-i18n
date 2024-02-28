@@ -1,4 +1,5 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { Customer } from "@medusajs/medusa"
 import React, { useEffect } from "react"
@@ -8,6 +9,7 @@ import Input from "@modules/common/components/input"
 import AccountInfo from "../account-info"
 import { updateCustomerPassword } from "@modules/account/actions"
 import { useFormState } from "react-dom"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 type MyInformationProps = {
   customer: Omit<Customer, "password_hash">
@@ -15,6 +17,7 @@ type MyInformationProps = {
 
 const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   const [successState, setSuccessState] = React.useState(false)
+  const t = useSafeTranslations()
 
   const [state, formAction] = useFormState(updateCustomerPassword, {
     customer,
@@ -34,9 +37,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
     <form action={formAction} onReset={() => clearState()} className="w-full">
       <AccountInfo
         label="Password"
-        currentInfo={
-          <span>The password is not shown for security reasons</span>
-        }
+        currentInfo={<span>{t(k.THE_PASSWORD_IS_NOT_SHOWN_FOR)}</span>}
         isSuccess={successState}
         isError={!!state.error}
         errorMessage={state.error}
@@ -49,12 +50,14 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
             required
             type="password"
           />
+
           <Input
             label="New password"
             type="password"
             name="new_password"
             required
           />
+
           <Input
             label="Confirm password"
             type="password"

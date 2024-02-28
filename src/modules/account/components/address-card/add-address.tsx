@@ -1,4 +1,5 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { Region } from "@medusajs/medusa"
 import { Plus } from "@medusajs/icons"
@@ -39,6 +40,7 @@ const AddAddress = ({ region }: { region: Region }) => {
       setSuccessState(true)
     }
   }, [formState])
+  const t = useSafeTranslations()
 
   return (
     <>
@@ -46,13 +48,13 @@ const AddAddress = ({ region }: { region: Region }) => {
         className="border border-ui-border-base rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between"
         onClick={open}
       >
-        <span className="text-base-semi">New address</span>
+        <span className="text-base-semi">{t(k.NEW_ADDRESS)}</span>
         <Plus />
       </button>
 
       <Modal isOpen={state} close={close}>
         <Modal.Title>
-          <Heading className="mb-2">Add address</Heading>
+          <Heading className="mb-2">{t(k.ADD_ADDRESS)}</Heading>
         </Modal.Title>
         <form action={formAction}>
           <Modal.Body>
@@ -64,6 +66,7 @@ const AddAddress = ({ region }: { region: Region }) => {
                   required
                   autoComplete="given-name"
                 />
+
                 <Input
                   label="Last name"
                   name="last_name"
@@ -76,17 +79,20 @@ const AddAddress = ({ region }: { region: Region }) => {
                 name="company"
                 autoComplete="organization"
               />
+
               <Input
                 label="Address"
                 name="address_1"
                 required
                 autoComplete="address-line1"
               />
+
               <Input
                 label="Apartment, suite, etc."
                 name="address_2"
                 autoComplete="address-line2"
               />
+
               <div className="grid grid-cols-[144px_1fr] gap-x-2">
                 <Input
                   label="Postal code"
@@ -94,6 +100,7 @@ const AddAddress = ({ region }: { region: Region }) => {
                   required
                   autoComplete="postal-code"
                 />
+
                 <Input
                   label="City"
                   name="city"
@@ -106,12 +113,14 @@ const AddAddress = ({ region }: { region: Region }) => {
                 name="province"
                 autoComplete="address-level1"
               />
+
               <CountrySelect
                 region={region}
                 name="country_code"
                 required
                 autoComplete="country"
               />
+
               <Input label="Phone" name="phone" autoComplete="phone" />
             </div>
             {formState.error && (
@@ -128,9 +137,9 @@ const AddAddress = ({ region }: { region: Region }) => {
                 onClick={close}
                 className="h-10"
               >
-                Cancel
+                {t(k.CANCEL)}
               </Button>
-              <SubmitButton>Save</SubmitButton>
+              <SubmitButton>{t(k.SAVE)}</SubmitButton>
             </div>
           </Modal.Footer>
         </form>

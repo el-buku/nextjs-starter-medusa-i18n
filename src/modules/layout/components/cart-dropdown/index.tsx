@@ -1,4 +1,5 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { Popover, Transition } from "@headlessui/react"
 import { Cart } from "@medusajs/medusa"
@@ -13,15 +14,19 @@ import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const CartDropdown = ({
   cart: cartState,
 }: {
   cart?: Omit<Cart, "beforeInsert" | "afterLoad"> | null
 }) => {
+  const t = useSafeTranslations()
+
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
     undefined
   )
+
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
 
   const { countryCode } = useParams()
@@ -79,10 +84,9 @@ const CartDropdown = ({
     >
       <Popover className="relative h-full">
         <Popover.Button className="h-full">
-          <LocalizedClientLink
-            className="hover:text-ui-fg-base"
-            href="/cart"
-          >{`Cart (${totalItems})`}</LocalizedClientLink>
+          <LocalizedClientLink className="hover:text-ui-fg-base" href="/cart">
+            {`${t(k.CART1)}${totalItems}${t(k._4)}`}
+          </LocalizedClientLink>
         </Popover.Button>
         <Transition
           show={cartDropdownOpen}
@@ -99,7 +103,7 @@ const CartDropdown = ({
             className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[420px] text-ui-fg-base"
           >
             <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Cart</h3>
+              <h3 className="text-large-semi">{t(k.CART)}</h3>
             </div>
             {cartState && cartState.items?.length ? (
               <>
@@ -131,7 +135,9 @@ const CartDropdown = ({
                                   </LocalizedClientLink>
                                 </h3>
                                 <LineItemOptions variant={item.variant} />
-                                <span>Quantity: {item.quantity}</span>
+                                <span>
+                                  {t(k.QUANTITY)} {item.quantity}
+                                </span>
                               </div>
                               <div className="flex justify-end">
                                 <LineItemPrice
@@ -143,7 +149,7 @@ const CartDropdown = ({
                             </div>
                           </div>
                           <DeleteButton id={item.id} className="mt-1">
-                            Remove
+                            {t(k.REMOVE)}
                           </DeleteButton>
                         </div>
                       </div>
@@ -152,8 +158,8 @@ const CartDropdown = ({
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
-                      Subtotal{" "}
-                      <span className="font-normal">(excl. taxes)</span>
+                      {t(k.SUBTOTAL)}{" "}
+                      <span className="font-normal">{t(k.EXCL_TAXES)}</span>
                     </span>
                     <span className="text-large-semi">
                       {formatAmount({
@@ -165,7 +171,7 @@ const CartDropdown = ({
                   </div>
                   <LocalizedClientLink href="/cart" passHref>
                     <Button className="w-full" size="large">
-                      Go to cart
+                      {t(k.GO_TO_CART)}
                     </Button>
                   </LocalizedClientLink>
                 </div>
@@ -174,14 +180,16 @@ const CartDropdown = ({
               <div>
                 <div className="flex py-16 flex-col gap-y-4 items-center justify-center">
                   <div className="bg-gray-900 text-small-regular flex items-center justify-center w-6 h-6 rounded-full text-white">
-                    <span>0</span>
+                    <span>{t(k._6)}</span>
                   </div>
-                  <span>Your shopping bag is empty.</span>
+                  <span>{t(k.YOUR_SHOPPING_BAG_IS_EMPTY)}</span>
                   <div>
                     <LocalizedClientLink href="/store">
                       <>
-                        <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <span className="sr-only">
+                          {t(k.GO_TO_ALL_PRODUCTS_PAGE)}
+                        </span>
+                        <Button onClick={close}>{t(k.EXPLORE_PRODUCTS)}</Button>
                       </>
                     </LocalizedClientLink>
                   </div>

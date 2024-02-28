@@ -1,10 +1,12 @@
 "use client"
+import k from "@lib/i18n/translations/keys"
 
 import { Heading, Text, clx } from "@medusajs/ui"
 
 import PaymentButton from "../payment-button"
 import { useSearchParams } from "next/navigation"
 import { Cart } from "@medusajs/medusa"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const Review = ({
   cart,
@@ -19,6 +21,7 @@ const Review = ({
     cart.shipping_address &&
     cart.shipping_methods.length > 0 &&
     cart.payment_session
+  const t = useSafeTranslations()
 
   return (
     <div className="bg-white">
@@ -32,7 +35,7 @@ const Review = ({
             }
           )}
         >
-          Review
+          {t(k.REVIEW)}
         </Heading>
       </div>
       {isOpen && previousStepsCompleted && (
@@ -40,10 +43,7 @@ const Review = ({
           <div className="flex items-start gap-x-1 w-full mb-6">
             <div className="w-full">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                By clicking the Place Order button, you confirm that you have
-                read, understand and accept our Terms of Use, Terms of Sale and
-                Returns Policy and acknowledge that you have read Medusa
-                Store&apos;s Privacy Policy.
+                {t(k.BY_CLICKING_THE_PLACE_ORDER_BU)}
               </Text>
             </div>
           </div>

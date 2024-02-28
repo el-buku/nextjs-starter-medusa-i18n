@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { Heading } from "@medusajs/ui"
 
 import ItemsPreviewTemplate from "@modules/cart/templates/preview"
@@ -6,6 +7,7 @@ import CartTotals from "@modules/common/components/cart-totals"
 import Divider from "@modules/common/components/divider"
 import { cookies } from "next/headers"
 import { getCart } from "@lib/data"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const CheckoutSummary = async () => {
   const cartId = cookies().get("_medusa_cart_id")?.value
@@ -13,6 +15,7 @@ const CheckoutSummary = async () => {
   if (!cartId) {
     return null
   }
+  const t = useSafeTranslations()
 
   const cart = await getCart(cartId).then((cart) => cart)
 
@@ -28,7 +31,7 @@ const CheckoutSummary = async () => {
           level="h2"
           className="flex flex-row text-3xl-regular items-baseline"
         >
-          In your Cart
+          {t(k.IN_YOUR_CART)}
         </Heading>
         <Divider className="my-6" />
         <CartTotals data={cart} />

@@ -1,3 +1,4 @@
+import k from "@lib/i18n/translations/keys"
 import { XMarkMini } from "@medusajs/icons"
 import { FormEvent } from "react"
 import { useRouter } from "@lib/i18n/navigation"
@@ -5,6 +6,7 @@ import { useRouter } from "@lib/i18n/navigation"
 import SearchBoxWrapper, {
   ControlledSearchBoxProps,
 } from "../search-box-wrapper"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const ControlledSearchBox = ({
   inputRef,
@@ -38,6 +40,7 @@ const ControlledSearchBox = ({
       inputRef.current.focus()
     }
   }
+  const t = useSafeTranslations()
 
   return (
     <div {...props} className="w-full">
@@ -55,6 +58,7 @@ const ControlledSearchBox = ({
             onChange={onChange}
             className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
           />
+
           {value && (
             <button
               onClick={handleReset}
@@ -62,7 +66,7 @@ const ControlledSearchBox = ({
               className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large flex"
             >
               <XMarkMini />
-              Cancel
+              {t(k.CANCEL)}
             </button>
           )}
         </div>
