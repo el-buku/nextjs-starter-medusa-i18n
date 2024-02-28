@@ -10,7 +10,9 @@ const store = require("./store.config.json")
 const configOpts = {
   features: store.features,
   reactStrictMode: true,
-  ignoreDuringBuilds: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
