@@ -12,10 +12,10 @@ import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 const CheckoutSummary = async () => {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
+  const t = useSafeTranslations()
   if (!cartId) {
     return null
   }
-  const t = useSafeTranslations()
 
   const cart = await getCart(cartId).then((cart) => cart)
 

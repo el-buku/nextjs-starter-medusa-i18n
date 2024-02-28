@@ -63,7 +63,6 @@ async function getCountryCode(
     const vercelCountryCode = request.headers
       .get("x-vercel-ip-country")
       ?.toLowerCase()
-    console.log({ pna: request.nextUrl.pathname.split("/") })
     const urlCountryCode = request.nextUrl.pathname
       .split("/")
       [countryCodePathnameIndex]?.toLowerCase()
@@ -138,7 +137,6 @@ export async function middleware(request: NextRequest) {
   let response = NextResponse.redirect(redirectUrl, 307)
   if (urlHasUnknownLocale) {
     redirectUrl = `${request.nextUrl.origin}/${fallbackLng}/${redirectPath}${queryString}`
-    console.log("urlHasUnknownLocale", { redirectUrl })
     response = NextResponse.redirect(`${redirectUrl}`, 307)
   }
   // If no country code is set, we redirect to the relevant region.
@@ -146,7 +144,6 @@ export async function middleware(request: NextRequest) {
     redirectUrl = `${request.nextUrl.origin}/${
       urlHasKnownLocale ? pathnameArr[1] + "/" : ""
     }${countryCode}/${redirectPath}${queryString}`
-    console.log("urlHasCountryCode", { redirectUrl })
     response = NextResponse.redirect(`${redirectUrl}`, 307)
   }
 

@@ -8,11 +8,11 @@ import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 const ShowAll = () => {
   const { hits } = useHits()
   const { query } = useSearchBox()
+  const t = useSafeTranslations()
   const width = typeof window !== "undefined" ? window.innerWidth : 0
 
   if (query === "") return null
   if (hits.length > 0 && hits.length <= 6) return null
-  const t = useSafeTranslations()
 
   if (hits.length === 0) {
     return (

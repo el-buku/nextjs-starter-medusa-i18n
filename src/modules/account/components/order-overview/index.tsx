@@ -9,6 +9,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
 
 const OrderOverview = ({ orders }: { orders: Order[] }) => {
+  const t = useSafeTranslations()
   if (orders?.length) {
     return (
       <div className="flex flex-col gap-y-8 w-full">
@@ -23,7 +24,6 @@ const OrderOverview = ({ orders }: { orders: Order[] }) => {
       </div>
     )
   }
-  const t = useSafeTranslations()
 
   return (
     <div className="w-full flex flex-col items-center gap-y-4">
