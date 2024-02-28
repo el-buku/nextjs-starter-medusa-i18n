@@ -1,5 +1,5 @@
-import k from "../keys"
-export default {
+import k, { TranslationDef } from "../keys"
+const def: TranslationDef = {
   [k.BACK_TO_SHOPPING_CART]: `一匕丑但呈天刁托夷耳方努判今有叵住老戍兀乙`,
   [k.BACK]: `亨亡匕廿`,
   [k.MEDUSA_STORE]: `斥犯江亡吞企戈冊合冶日丟`,
@@ -158,3 +158,4 @@ export default {
   [k.RESULTS]: `口仞占江叼白扔吉`,
   [k.VIEW_ALL]: `朱佗叨佝劫刎乞手`,
 }
+export default def

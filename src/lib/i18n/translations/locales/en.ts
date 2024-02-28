@@ -1,6 +1,6 @@
-import k from "../keys"
+import k, { TranslationDef } from "../keys"
 
-module.exports = {
+const def: TranslationDef = {
   [k.BACK_TO_SHOPPING_CART]: `Back to shopping cart`,
   [k.BACK]: `Back`,
   [k.MEDUSA_STORE]: `Medusa Store`,
@@ -175,3 +175,4 @@ module.exports = {
   [k.RESULTS]: `results.`,
   [k.VIEW_ALL]: `View all`,
 }
+export default def

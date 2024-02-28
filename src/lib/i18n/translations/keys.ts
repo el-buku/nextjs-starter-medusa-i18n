@@ -1,4 +1,6 @@
-export default {
+import { SupportedLangs } from "../settings"
+
+const keys = {
   BACK_TO_SHOPPING_CART: "BACK_TO_SHOPPING_CART",
   BACK: "BACK",
   MEDUSA_STORE: "MEDUSA_STORE",
@@ -156,4 +158,13 @@ export default {
   SHOWING_THE_FIRST: "SHOWING_THE_FIRST",
   RESULTS: "RESULTS",
   VIEW_ALL: "VIEW_ALL",
-}
+} as const
+
+// Define the type of keys by extracting the keys from your `keys` object
+type Key = keyof typeof keys
+
+// Add as many locales as you support
+
+// Construct a type for translations that ensures every locale uses every key
+export type TranslationDef = Record<Key, string>
+export default keys
