@@ -44,7 +44,6 @@ const Shipping: React.FC<ShippingProps> = ({
     setIsLoading(true)
     router.push(pathname + "?step=payment", { scroll: false })
   }
-  console.log({ availableShippingMethods })
   const set = async (id: string) => {
     setIsLoading(true)
     await setShippingMethod(id)
