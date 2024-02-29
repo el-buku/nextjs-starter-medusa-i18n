@@ -216,5 +216,6 @@ const def: TranslationDef = {
   [k.CONTINUE_TO_REVIEW]: "继续审查",
   [k.NEXT_STEP_APPEARS]: "下一步将会出现",
   [k.CONTINUE_TO_DELIVERY]: "继续送货",
+  [k.PRICE]: "价格",
 }
 export default def

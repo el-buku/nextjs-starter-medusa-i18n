@@ -228,5 +228,6 @@ const def: TranslationDef = {
   [k.CONTINUE_TO_REVIEW]: "Continuer vers l'examen",
   [k.NEXT_STEP_APPEARS]: "Une autre étape apparaîtra",
   [k.CONTINUE_TO_DELIVERY]: "Continuer vers la livraison",
+  [k.PRICE]: "Prix",
 }
 export default def

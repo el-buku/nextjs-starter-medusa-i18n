@@ -24,6 +24,7 @@ const keys = {
   _1: "_1",
   ITEMS: "ITEMS",
   ITEM: "ITEM",
+  PRICE: "PRICE",
   X: "X",
   _2: "_2",
   MORE: "MORE",
