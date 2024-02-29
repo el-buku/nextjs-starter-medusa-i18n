@@ -9,7 +9,7 @@ import ProfilePassword from "@modules/account/components/profile-password"
 
 import { getCustomer, listRegions } from "@lib/data"
 import { notFound } from "next/navigation"
-import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { getTranslations } from "next-intl/server"
 
 export const metadata: Metadata = {
   title: "Profile",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Profile() {
-  const t = useSafeTranslations()
+  const t = await getTranslations()
 
   const customer = await getCustomer()
   const regions = await listRegions()

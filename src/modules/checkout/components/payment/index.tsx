@@ -17,6 +17,8 @@ import { setPaymentMethod } from "@modules/checkout/actions"
 import { paymentInfoMap } from "@lib/constants"
 import { StripeContext } from "@modules/checkout/components/payment-wrapper"
 import { usePathname, useRouter } from "@lib/i18n/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import k from "@lib/i18n/translations/keys"
 
 const Payment = ({
   cart,
@@ -27,7 +29,7 @@ const Payment = ({
   const [error, setError] = useState<string | null>(null)
   const [cardBrand, setCardBrand] = useState<string | null>(null)
   const [cardComplete, setCardComplete] = useState(false)
-
+  const t = useSafeTranslations()
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -113,7 +115,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          {t(k.PAYMENT)}
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -122,7 +124,7 @@ const Payment = ({
               onClick={handleEdit}
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
             >
-              Edit
+              {t(k.EDIT)}
             </button>
           </Text>
         )}
@@ -155,7 +157,7 @@ const Payment = ({
             {isStripe && stripeReady && (
               <div className="mt-5 transition-all duration-150 ease-in-out">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Enter your card details:
+                  {t(k.ENTER_CARD_DETS)}
                 </Text>
 
                 <CardElement
@@ -181,7 +183,7 @@ const Payment = ({
               isLoading={isLoading}
               disabled={(isStripe && !cardComplete) || !cart.payment_session}
             >
-              Continue to review
+              {t(k.CONTINUE_TO_REVIEW)}
             </Button>
           </div>
         ) : (
@@ -195,7 +197,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  {t(k.PAYMENT_METHOD)}
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {paymentInfoMap[cart.payment_session.provider_id]?.title ||
@@ -211,7 +213,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  {t(k.PAYMENT_DETAILS)}
                 </Text>
                 <div className="flex gap-2 txt-medium text-ui-fg-subtle items-center">
                   <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
@@ -222,7 +224,7 @@ const Payment = ({
                   <Text>
                     {cart.payment_session.provider_id === "stripe" && cardBrand
                       ? cardBrand
-                      : "Another step will appear"}
+                      : t(k.NEXT_STEP_APPEARS)}
                   </Text>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { Metadata } from "next"
 import { NextIntlClientProvider } from "next-intl"
 import { unstable_setRequestLocale } from "next-intl/server"
 import { cookies } from "next/headers"
+import { Suspense } from "react"
 import "styles/globals.css"
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:8000"
@@ -34,7 +35,11 @@ export default async function RootLayout({
     <html lang={locale} data-mode="light">
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body>
-          <main className="relative">{children}</main>
+          <main className="relative">
+            {/* <Suspense fallback={<></>}> */}
+            {children}
+            {/* </Suspense> */}
+          </main>
         </body>
       </NextIntlClientProvider>
     </html>

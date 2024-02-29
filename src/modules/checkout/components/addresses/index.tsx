@@ -16,6 +16,8 @@ import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
 import { usePathname, useRouter } from "@lib/i18n/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import k from "@lib/i18n/translations/keys"
 
 const Addresses = ({
   cart,
@@ -28,7 +30,7 @@ const Addresses = ({
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
-
+  const t = useSafeTranslations()
   const countryCode = params.countryCode as string
 
   const isOpen = searchParams.get("step") === "address"
@@ -52,7 +54,7 @@ const Addresses = ({
           level="h2"
           className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
         >
-          Shipping Address
+          {t(k.SHIPPING_ADDRESS)}
           {!isOpen && <CheckCircleSolid />}
         </Heading>
         {!isOpen && cart?.shipping_address && (
@@ -61,7 +63,7 @@ const Addresses = ({
               onClick={handleEdit}
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
             >
-              Edit
+              {t(k.EDIT)}
             </button>
           </Text>
         )}
@@ -83,13 +85,15 @@ const Addresses = ({
                   level="h2"
                   className="text-3xl-regular gap-x-4 pb-6 pt-8"
                 >
-                  Billing address
+                  {t(k.BILLING_ADDRESS)}
                 </Heading>
 
                 <BillingAddress cart={cart} countryCode={countryCode} />
               </div>
             )}
-            <SubmitButton className="mt-6">Continue to delivery</SubmitButton>
+            <SubmitButton className="mt-6">
+              {t(k.CONTINUE_TO_DELIVERY)}
+            </SubmitButton>
             <ErrorMessage error={message} />
           </div>
         </form>
@@ -101,7 +105,7 @@ const Addresses = ({
                 <div className="flex items-start gap-x-1 w-full">
                   <div className="flex flex-col w-1/3">
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      Shipping Address
+                      {t(k.SHIPPING_ADDRESS)}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
                       {cart.shipping_address.first_name}{" "}
@@ -122,7 +126,7 @@ const Addresses = ({
 
                   <div className="flex flex-col w-1/3 ">
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      Contact
+                      {t(k.CONTACT)}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
                       {cart.shipping_address.phone}
@@ -134,12 +138,12 @@ const Addresses = ({
 
                   <div className="flex flex-col w-1/3">
                     <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                      Billing Address
+                      {t(k.BILLING_ADDRESS)}
                     </Text>
 
                     {sameAsSBilling ? (
                       <Text className="txt-medium text-ui-fg-subtle">
-                        Billing- and delivery address are the same.
+                        {t(k.BILLING_ADDRESS_SAME_AS_DELIVERY_ADDRESS)}
                       </Text>
                     ) : (
                       <>

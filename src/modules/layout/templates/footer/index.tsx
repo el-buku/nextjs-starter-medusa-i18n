@@ -5,10 +5,10 @@ import { getCategoriesList, getCollectionsList } from "@lib/data"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
-import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { getTranslations } from "next-intl/server"
 
 export default async function Footer() {
-  const t = useSafeTranslations()
+  const t = await getTranslations()
 
   const { collections } = await getCollectionsList(0, 6)
   const { product_categories } = await getCategoriesList(0, 6)

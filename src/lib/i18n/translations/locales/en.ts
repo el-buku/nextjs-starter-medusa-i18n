@@ -104,6 +104,7 @@ const def: TranslationDef = {
   [k.LARGE]: `large`,
   [k.GO_TO_CART]: `Go to cart`,
   [k._6]: `0`,
+  [k.CONTINUE_TO_PAYMENT]: "Continue to Payment",
   [k.YOUR_SHOPPING_BAG_IS_EMPTY]: `Your shopping bag is empty.`,
   [k.GO_TO_ALL_PRODUCTS_PAGE]: `Go to all products page`,
   [k.POWERED_BY]: `Powered by`,
@@ -115,6 +116,8 @@ const def: TranslationDef = {
   [k.MENU_SEARCH]: `Search`,
   [k.MENU_CART]: `Cart`,
   [k._8]: `©`,
+  [k.BILLING_ADDRESS_SAME_AS_DELIVERY_ADDRESS]:
+    "Billing and delivery address are the same.",
   [k.MEDUSA_STORE_ALL_RIGHTS]: `Medusa Store. All rights
                         reserved.`,
   [k.CATEGORIES]: `Categories`,
@@ -213,6 +216,26 @@ const def: TranslationDef = {
   [k.LATEST_ARRIVALS]: "Latest Arrivals",
   [k.PRICE_LOW_HIGH]: "Price: Low -> High",
   [k.PRICE_HIGH_LOW]: "Price: High -> Low",
+
+  [k.HELLO_CUSTOMER]: "Hello",
+  [k.SIGNED_IN_AS]: "Signed in as:",
+  [k.PROFILE]: "Profile",
+  [k.COMPLETED]: "Completed",
+  [k.ADDRESSES]: "Addresses",
+  [k.SAVED]: "Saved",
+  [k.RECENT_ORDERS]: "Recent orders",
+  [k.DATE_PLACED]: "Date placed",
+  [k.ORDER_NUMBER]: "Order number",
+  [k.TOTAL_AMOUNT]: "Total amount",
+  [k.NO_RECENT_ORDERS]: "No recent orders",
+  [k.GO_TO_ORDER]: "Go to order",
+  [k.ACCOUNTS]: "Accounts",
+  [k.OVERVIEW]: "Overview",
+  [k.LOG_OUT]: "Log out",
+  [k.ENTER_CARD_DETS]: "Enter your card details",
+  [k.CONTINUE_TO_REVIEW]: "Continue to review",
+  [k.NEXT_STEP_APPEARS]: "Another step will appear",
+  [k.CONTINUE_TO_DELIVERY]: "Continue to delivery",
 }
 
 export default def

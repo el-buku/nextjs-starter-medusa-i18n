@@ -12,6 +12,8 @@ import MapPin from "@modules/common/icons/map-pin"
 import Package from "@modules/common/icons/package"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { usePathname } from "@lib/i18n/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import k from "@lib/i18n/translations/keys"
 
 const AccountNav = ({
   customer,
@@ -20,7 +22,7 @@ const AccountNav = ({
 }) => {
   const route = usePathname()
   const { countryCode } = useParams()
-
+  const t = useSafeTranslations()
   const handleLogout = async () => {
     await signOut()
   }
@@ -35,13 +37,13 @@ const AccountNav = ({
           >
             <>
               <ChevronDown className="transform rotate-90" />
-              <span>Account</span>
+              <span>{t(k.ACCOUNT)}</span>
             </>
           </LocalizedClientLink>
         ) : (
           <>
             <div className="text-xl-semi mb-4 px-8">
-              Hello {customer?.first_name}
+              {t(k.HELLO_CUSTOMER)} {customer?.first_name}
             </div>
             <div className="text-base-regular">
               <ul>
@@ -53,7 +55,7 @@ const AccountNav = ({
                     <>
                       <div className="flex items-center gap-x-2">
                         <User size={20} />
-                        <span>Profile</span>
+                        <span>{t(k.PROFILE)}</span>
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
@@ -67,7 +69,7 @@ const AccountNav = ({
                     <>
                       <div className="flex items-center gap-x-2">
                         <MapPin size={20} />
-                        <span>Addresses</span>
+                        <span>{t(k.ADDRESSES)}</span>
                       </div>
                       <ChevronDown className="transform -rotate-90" />
                     </>
@@ -80,7 +82,7 @@ const AccountNav = ({
                   >
                     <div className="flex items-center gap-x-2">
                       <Package size={20} />
-                      <span>Orders</span>
+                      <span>{t(k.ACCOUNT)}</span>
                     </div>
                     <ChevronDown className="transform -rotate-90" />
                   </LocalizedClientLink>
@@ -93,7 +95,7 @@ const AccountNav = ({
                   >
                     <div className="flex items-center gap-x-2">
                       <ArrowRightOnRectangle />
-                      <span>Log out</span>
+                      <span>{t(k.LOG_OUT)}</span>
                     </div>
                     <ChevronDown className="transform -rotate-90" />
                   </button>
@@ -106,33 +108,33 @@ const AccountNav = ({
       <div className="hidden small:block">
         <div>
           <div className="pb-4">
-            <h3 className="text-base-semi">Account</h3>
+            <h3 className="text-base-semi">{t(k.ACCOUNT)}</h3>
           </div>
           <div className="text-base-regular">
             <ul className="flex mb-0 justify-start items-start flex-col gap-y-4">
               <li>
                 <AccountNavLink href="/account" route={route!}>
-                  Overview
+                  {t(k.OVERVIEW)}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink href="/account/profile" route={route!}>
-                  Profile
+                  {t(k.PROFILE)}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink href="/account/addresses" route={route!}>
-                  Addresses
+                  {t(k.ADDRESSES)}
                 </AccountNavLink>
               </li>
               <li>
                 <AccountNavLink href="/account/orders" route={route!}>
-                  Orders
+                  {t(k.ORDERS)}
                 </AccountNavLink>
               </li>
               <li className="text-grey-700">
                 <button type="button" onClick={handleLogout}>
-                  Log out
+                  {t(k.LOG_OUT)}
                 </button>
               </li>
             </ul>

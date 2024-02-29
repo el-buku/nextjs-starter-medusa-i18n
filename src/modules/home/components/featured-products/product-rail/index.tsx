@@ -3,6 +3,7 @@ import { Text } from "@medusajs/ui"
 
 import InteractiveLink from "@modules/common/components/interactive-link"
 import ProductPreview from "@modules/products/components/product-preview"
+import { Suspense } from "react"
 import { ProductCollectionWithPreviews } from "types/global"
 
 export default function ProductRail({
@@ -30,11 +31,13 @@ export default function ProductRail({
         {products &&
           products.map((product) => (
             <li key={product.id}>
-              <ProductPreview
-                productPreview={product}
-                region={region}
-                isFeatured
-              />
+              <Suspense fallback={<></>}>
+                <ProductPreview
+                  productPreview={product}
+                  region={region}
+                  isFeatured
+                />
+              </Suspense>
             </li>
           ))}
       </ul>

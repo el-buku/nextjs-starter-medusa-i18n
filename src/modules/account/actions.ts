@@ -269,5 +269,5 @@ export async function signOut() {
   const countryCode = headers().get("next-url")?.split("/")[1] || ""
   revalidateTag("auth")
   revalidateTag("customer")
-  redirect(`/${countryCode}/account`)
+  redirect(`/account`)
 }

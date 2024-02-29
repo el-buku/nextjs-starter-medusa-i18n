@@ -8,16 +8,19 @@ import Divider from "@modules/common/components/divider"
 import { cookies } from "next/headers"
 import { getCart } from "@lib/data"
 import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { Cart } from "@medusajs/medusa"
 
-const CheckoutSummary = async () => {
-  const cartId = cookies().get("_medusa_cart_id")?.value
-
+const CheckoutSummary = ({
+  cartId,
+  cart,
+}: {
+  cartId: string
+  cart: Omit<Cart, "refundable_amount" | "refunded_total">
+}) => {
   const t = useSafeTranslations()
   if (!cartId) {
     return null
   }
-
-  const cart = await getCart(cartId).then((cart) => cart)
 
   if (!cart) {
     return null

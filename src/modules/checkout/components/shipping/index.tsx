@@ -15,6 +15,8 @@ import { setShippingMethod } from "@modules/checkout/actions"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import { usePathname, useRouter } from "@lib/i18n/navigation"
+import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import k from "@lib/i18n/translations/keys"
 
 type ShippingProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
@@ -27,7 +29,7 @@ const Shipping: React.FC<ShippingProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
+  const t = useSafeTranslations()
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -42,7 +44,7 @@ const Shipping: React.FC<ShippingProps> = ({
     setIsLoading(true)
     router.push(pathname + "?step=payment", { scroll: false })
   }
-
+  console.log({ availableShippingMethods })
   const set = async (id: string) => {
     setIsLoading(true)
     await setShippingMethod(id)
@@ -77,7 +79,7 @@ const Shipping: React.FC<ShippingProps> = ({
             }
           )}
         >
-          Delivery
+          {t(k.DELIVERY)}
           {!isOpen && cart.shipping_methods.length > 0 && <CheckCircleSolid />}
         </Heading>
         {!isOpen &&
@@ -89,7 +91,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 onClick={handleEdit}
                 className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               >
-                Edit
+                {t(k.EDIT)}
               </button>
             </Text>
           )}
@@ -152,7 +154,7 @@ const Shipping: React.FC<ShippingProps> = ({
             isLoading={isLoading}
             disabled={!cart.shipping_methods[0]}
           >
-            Continue to payment
+            {t(k.CONTINUE_TO_PAYMENT)}
           </Button>
         </div>
       ) : (
@@ -161,7 +163,7 @@ const Shipping: React.FC<ShippingProps> = ({
             {cart && cart.shipping_methods.length > 0 && (
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Method
+                  {t(k.METHOD)}
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {cart.shipping_methods[0].shipping_option.name} (

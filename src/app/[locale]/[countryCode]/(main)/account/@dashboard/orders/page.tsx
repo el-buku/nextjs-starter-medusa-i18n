@@ -5,6 +5,7 @@ import OrderOverview from "@modules/account/components/order-overview"
 import { listCustomerOrders } from "@lib/data"
 import { notFound } from "next/navigation"
 import { useSafeTranslations } from "@lib/i18n/use-safe-translations"
+import { getTranslations } from "next-intl/server"
 
 export const metadata: Metadata = {
   title: "Orders",
@@ -17,7 +18,7 @@ export default async function Orders() {
   if (!orders) {
     notFound()
   }
-  const t = useSafeTranslations()
+  const t = await getTranslations()
 
   return (
     <div className="w-full">

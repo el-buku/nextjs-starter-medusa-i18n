@@ -13,46 +13,44 @@ export const metadata: Metadata = {
     "A performant frontend ecommerce starter template with Next.js 14 and Medusa.",
 }
 
-const getCollectionsWithProducts = cache(
-  async (
-    countryCode: string
-  ): Promise<ProductCollectionWithPreviews[] | null> => {
-    const { collections } = await getCollectionsList(0, 3)
+const getCollectionsWithProducts = async (
+  countryCode: string
+): Promise<ProductCollectionWithPreviews[] | null> => {
+  const { collections } = await getCollectionsList(0, 3)
 
-    if (!collections) {
-      return null
-    }
+  if (!collections) {
+    return null
+  }
 
-    const collectionIds = collections.map((collection) => collection.id)
+  const collectionIds = collections.map((collection) => collection.id)
 
-    await Promise.all(
-      collectionIds.map((id) =>
-        getProductsList({
-          queryParams: { collection_id: [id] },
-          countryCode,
-        })
-      )
-    ).then((responses) =>
-      responses.forEach(({ response, queryParams }) => {
-        let collection
-
-        if (collections) {
-          collection = collections.find(
-            (collection) => collection.id === queryParams?.collection_id?.[0]
-          )
-        }
-
-        if (!collection) {
-          return
-        }
-
-        collection.products = response.products as unknown as Product[]
+  await Promise.all(
+    collectionIds.map((id) =>
+      getProductsList({
+        queryParams: { collection_id: [id] },
+        countryCode,
       })
     )
+  ).then((responses) =>
+    responses.forEach(({ response, queryParams }) => {
+      let collection
 
-    return collections as unknown as ProductCollectionWithPreviews[]
-  }
-)
+      if (collections) {
+        collection = collections.find(
+          (collection) => collection.id === queryParams?.collection_id?.[0]
+        )
+      }
+
+      if (!collection) {
+        return
+      }
+
+      collection.products = response.products as unknown as Product[]
+    })
+  )
+
+  return collections as unknown as ProductCollectionWithPreviews[]
+}
 
 export default async function Home({
   params: { countryCode },
@@ -61,7 +59,7 @@ export default async function Home({
 }) {
   const collections = await getCollectionsWithProducts(countryCode)
   const region = await getRegion(countryCode)
-
+  console.log({ collections })
   if (!collections || !region) {
     return null
   }
