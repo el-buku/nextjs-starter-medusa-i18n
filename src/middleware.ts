@@ -100,11 +100,11 @@ export async function middleware(request: NextRequest) {
 
   const regionMap = await getRegionMap()
   const pathnameArr = request.nextUrl.pathname.split("/")
-  const urlHasKnownLocale = languages.includes(pathnameArr[1])
+  const urlHasKnownLocale = languages.includes(pathnameArr?.[1])
   // need to redirect manually if we provide a wrong locale when a countryCode is included
   const urlHasUnknownLocale =
     !urlHasKnownLocale &&
-    pathnameArr[1].length == 2 &&
+    pathnameArr?.[1]?.length == 2 &&
     (pathnameArr?.[2] ? pathnameArr[2].length == 2 : true)
   const countryCodePathnameIndex = urlHasKnownLocale ? 2 : 1
   const countryCode =
@@ -139,6 +139,8 @@ export async function middleware(request: NextRequest) {
     redirectUrl = `${request.nextUrl.origin}/${fallbackLng}/${redirectPath}${queryString}`
     response = NextResponse.redirect(`${redirectUrl}`, 307)
   }
+  if (!urlHasKnownLocale) return intlMiddleware(request)
+
   // If no country code is set, we redirect to the relevant region.
   if (!urlHasCountryCode && countryCode) {
     redirectUrl = `${request.nextUrl.origin}/${
