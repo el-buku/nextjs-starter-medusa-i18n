@@ -35,11 +35,7 @@ export default async function RootLayout({
     <html lang={locale} data-mode="light">
       <NextIntlClientProvider locale={locale} messages={messages}>
         <body>
-          <main className="relative">
-            {/* <Suspense fallback={<></>}> */}
-            {children}
-            {/* </Suspense> */}
-          </main>
+          <main className="relative">{children}</main>
         </body>
       </NextIntlClientProvider>
     </html>
